@@ -3,6 +3,8 @@ Daniele Gamba - Sfera con effetti ottici di rifrazione per Zuru Tech, aprile 201
 Il codice è da compilare in Unreal Engine 4.21.2
 
 
+Video di presentazione:
+https://youtu.be/vcRnIEh1pwA
 
 
 
