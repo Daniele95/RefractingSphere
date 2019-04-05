@@ -22,6 +22,7 @@ void AMyPlane::BeginPlay()
 		FActorSpawnParameters SpawnParams;
 		AGlassBall* myGlassBall = GetWorld()->SpawnActor<AGlassBall>(GlassBallBP, GetTransform(), SpawnParams);
 		myGlassBall->material = DynamicMatInstance;
+		sphereAlreadyGenerated = true;
 	}
 }
 

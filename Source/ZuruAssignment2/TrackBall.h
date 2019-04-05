@@ -8,6 +8,7 @@
 #include "Engine/Classes/GameFramework/FloatingPawnMovement.h"
 #include "Engine/Classes/Components/SphereComponent.h" 
 #include "GlassBall.h"
+#include "MyPlane.h"
 #include "TrackBall.generated.h"
 
 UCLASS()
@@ -30,6 +31,8 @@ public:
 private:
 	float time = 0;
 	bool animateLight = false;
+	AMyPlane* myPlane;
+	bool sphereAlreadyGenerated = false;
 
 	// camera controls
 	UCameraComponent* OurCamera;

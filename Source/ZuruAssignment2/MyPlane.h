@@ -28,5 +28,6 @@ private:
 public:
 	UPROPERTY(EditDefaultsOnly, Category = "ActorSpawning")
 	TSubclassOf<AGlassBall> GlassBallBP;
+	bool sphereAlreadyGenerated=false;
 
 };

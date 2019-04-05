@@ -23,16 +23,22 @@ ATrackBall::ATrackBall()
 void ATrackBall::BeginPlay()
 {
 	Super::BeginPlay();
-	for (TActorIterator<AGlassBall> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-	{
-		myGlassBall = *ActorItr;
-	}
+
+	for (TActorIterator<AMyPlane> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+		myPlane = *ActorItr;
+	
 }
 
 void ATrackBall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	// check if sphere is already been generated
+	if(!sphereAlreadyGenerated) {
+		sphereAlreadyGenerated = myPlane->sphereAlreadyGenerated;
+		for (TActorIterator<AGlassBall> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+			myGlassBall = *ActorItr;
+	}
+	// handle mouse control
 	if (Controller)
 	{
 		APlayerController* playerController = Cast<APlayerController>(GetController());
@@ -51,15 +57,17 @@ void ATrackBall::Tick(float DeltaTime)
 			}
 		}
 	}
-
+	// handle light animation
 	float elapsed = UGameplayStatics::GetRealTimeSeconds(GetWorld()) - time;
-	if (animateLight && elapsed<8 ) {
-		myGlassBall->lightPos.X = 500.*cos(elapsed);
-		myGlassBall->lightPos.Y = 500.*sin(elapsed);
-		myGlassBall->lightPos.Z = 300.;
-	}
-	else {
-		animateLight = 0.;
+	if(myGlassBall) {
+		if (animateLight && elapsed<8 ) {
+			myGlassBall->lightPos.X = 500.*cos(elapsed);
+			myGlassBall->lightPos.Y = 500.*sin(elapsed);
+			myGlassBall->lightPos.Z = 300.;
+		}
+		else {
+			animateLight = 0.;
+		}
 	}
 }
 
@@ -114,8 +122,10 @@ void ATrackBall::SetSphereSize(float size)
 
 void ATrackBall::SetRefractionIndex(float index)
 {
+	if(myGlassBall) {
 	myGlassBall->GlassRefractionIndex = myGlassBall->GlassRefractionIndex + index * .001;
 	if (myGlassBall->GlassRefractionIndex < 1) myGlassBall->GlassRefractionIndex = 1.;
+	}
 }
 
 void ATrackBall::Orbit(const float magnitudeX, const float magnitudeY)
