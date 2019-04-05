@@ -2,6 +2,10 @@ Daniele Gamba - Sfera con effetti ottici di rifrazione per Zuru Tech, aprile 201
 
 Il codice è da compilare in Unreal Engine 4.21.2
 
+
+
+
+
 L'implementazione si articola in tre classi:
 
 La classe Trackball rimpiazza la Pawn predefinita e implementa un sistema apposito di 
@@ -15,6 +19,12 @@ la sfera con i suoi parametri.
 La classe GlassBall riceve come input i parametri dalla Trackball e li passa al materiale
 del piano. 
 
+
+
+
+
+
+E' possibile giocare direttamente scaricando la repository e aprendo l'eseguibile nella cartella Standalone.
 
 Comandi:
 
